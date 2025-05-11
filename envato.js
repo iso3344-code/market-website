@@ -1,25 +1,44 @@
-const words = ["e-shop", "landing", "magazine", "website", "portfolio"];
-let index = 0;
-const wordEl = document.querySelector(".changing-word");
-
-setInterval(() => {
-  wordEl.classList.remove("fade-in");
-  wordEl.classList.add("fade-out");
-
-  setTimeout(() => {
-    index = (index + 1) % words.length;
-    wordEl.textContent = words[index];
-    wordEl.classList.remove("fade-out");
-    wordEl.classList.add("fade-in");
-  }, 500);
-}, 3000);
-
-document.getElementById("showMoreBtn").addEventListener("click", function() {
+document.addEventListener("DOMContentLoaded", function () {
+  const button = document.querySelector(".buttonhide");
+  button.addEventListener("click", function () {
     const hiddenImages = document.querySelectorAll(".image.hidden");
     hiddenImages.forEach(image => {
       image.classList.remove("hidden");
       image.classList.add("visible");
     });
-   
     this.style.display = "none";
   });
+});
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const slider = document.querySelector('.slider-track');
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  slider.addEventListener('mousedown', (e) => {
+    isDown = true;
+    slider.classList.add('active');
+    startX = e.pageX - slider.offsetLeft;
+    scrollLeft = slider.scrollLeft;
+  });
+
+  slider.addEventListener('mouseleave', () => {
+    isDown = false;
+    slider.classList.remove('active');
+  });
+
+  slider.addEventListener('mouseup', () => {
+    isDown = false;
+    slider.classList.remove('active');
+  });
+
+  slider.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - slider.offsetLeft;
+    const walk = (x - startX) * 2; // sürət
+    slider.scrollLeft = scrollLeft - walk;
+  });
+});
