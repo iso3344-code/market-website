@@ -178,17 +178,20 @@
   display: flex;
   gap: 20px;
   animation: slide 10s infinite linear; 
+  overflow: hidden;
 }
 
 .slide {
   min-width: 300px;
   flex-shrink: 0;
+
 }
 
 .slide img {
   width: 400px;
   height: 250px;
   border-radius: 10px;
+  
 }
 
 
